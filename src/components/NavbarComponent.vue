@@ -1,10 +1,15 @@
 <script setup lang="ts">
-
+import SidebarComponent from '../components/SidebarComponent.vue'
+import { isSidebarOpen, toggleSidebar } from '../assets/services/sidebar.js'
 </script>
 
 <template>
   <nav class="fixed top-0 left-0 flex bg-[#322886] w-full h-[70px]">
-    <h3 class="flex text-[#ebebeb] font-bold text-3xl items-center ml-[30px]">MII Catalog</h3>
+    <button
+        @click="toggleSidebar"
+        class="flex text-[#ebebeb] font-bold text-3xl items-center ml-[30px] cursor-pointer">
+      MII Catalog
+    </button>
     <form class="flex items-center ml-auto">
       <input
           type="text"
@@ -19,6 +24,10 @@
       </button>
     </form>
   </nav>
+  <SidebarComponent
+    v-if="isSidebarOpen"
+    @close="toggleSidebar"
+  />
 </template>
 
 <style scoped>
