@@ -21,6 +21,10 @@
   <div class="flex justify-center items-center w-full h-[40px] bg-gray-500 mt-2">aaaa</div>
   <div class="flex justify-center items-center w-full h-[40px] bg-gray-500 mt-2">aaaa</div>
   <div class="flex justify-center items-center w-full h-[40px] bg-gray-500 mt-2">aaaa</div>
+  <div class="flex items-center w-full h-[30px] px-6 mb-2 mt-auto bg-blue-400">
+    <button class="text-red-500 w-[70px] h-full bg-black rounded-md">prev</button>
+    <button class="text-red-500 w-[70px] h-full bg-black rounded-md ml-auto">next</button>
+  </div>
 </div>
 </template>
 
