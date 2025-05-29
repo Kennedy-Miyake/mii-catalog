@@ -1,5 +1,5 @@
 import api from './api'
 
-export function getProductById(id) {
-    return api.get(`/products/${id}`)
+export function getProducts(limit, skip) {
+    return api.get(`/products/?limit=${limit}&skip=${skip}&select=title,price,images`)
 }
