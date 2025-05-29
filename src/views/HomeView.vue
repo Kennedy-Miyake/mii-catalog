@@ -20,7 +20,7 @@ onMounted(async() => {
 </script>
 
 <template>
-  <section class="relative grid grid-cols-7 grid-rows-3 w-[1575px] h-[850px] ml-auto mt-[75px] mr-[15px] p-6 rounded-2xl bg-black">
+  <section class="relative grid grid-cols-7 grid-rows-3 w-[1575px] h-[850px] ml-auto mt-[75px] mr-[15px] p-6 rounded-2xl shadow-xl/30">
     <ProductCard
       v-for="p in products"
       :product="p"
