@@ -14,6 +14,19 @@ const fetchProduct = async () => {
   console.log(products)
 };
 
+const nextPage = () => {
+  skip.value += limit
+  fetchProduct()
+}
+
+const prevPage = () => {
+  if(skip.value == 0) {
+    return
+  }
+  skip.value -= limit
+  fetchProduct()
+}
+
 onMounted(async() => {
   fetchProduct()
 })
@@ -26,8 +39,8 @@ onMounted(async() => {
       :product="p"
     />
     <div class="absolute bottom-1 right-6 flex gap-16 mr-2">
-      <button class="px-4 py-2 rounded-lg bg-[#322886] text-white cursor-pointer">Prev</button>
-      <button class="px-4 py-2 rounded-lg bg-[#322886] text-white cursor-pointer">Next</button>
+      <button @click="prevPage" class="px-4 py-2 rounded-lg bg-[#322886] text-white cursor-pointer">Prev</button>
+      <button @click="nextPage" class="px-4 py-2 rounded-lg bg-[#322886] text-white cursor-pointer">Next</button>
     </div>
   </section>
 </template>
