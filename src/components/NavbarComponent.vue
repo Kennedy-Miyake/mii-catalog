@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <nav class="flex bg-[#322886] h-[70px]">
+  <nav class="fixed top-0 left-0 flex bg-[#322886] w-full h-[70px]">
     <h3 class="flex text-[#ebebeb] font-bold text-3xl items-center ml-[30px]">MII Catalog</h3>
     <form class="flex items-center ml-auto">
       <input
