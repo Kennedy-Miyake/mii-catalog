@@ -21,8 +21,9 @@
   <div class="flex justify-center items-center w-full h-[40px] text-[#ebebeb] hover:bg-[#2d2377] cursor-pointer mt-2">Hardware</div>
   <div class="flex justify-center items-center w-full h-[40px] text-[#ebebeb] hover:bg-[#2d2377] cursor-pointer mt-2">Hardware</div>
   <div class="flex justify-center items-center w-full h-[40px] text-[#ebebeb] hover:bg-[#2d2377] cursor-pointer mt-2">Hardware</div>
-    <button class="text-red-500 w-[70px] h-full bg-black rounded-md">prev</button>
-    <button class="text-red-500 w-[70px] h-full bg-black rounded-md ml-auto">next</button>
+  <div class="flex items-center w-full h-[30px] px-6 mb-2 mt-auto">
+    <button class="text-[#322886] w-[70px] h-full bg-[#ebebeb] border hover:text-[#ebebeb] hover:bg-transparent hover:border-[#ebebeb] cursor-pointer rounded-md">prev</button>
+    <button class="text-[#322886] w-[70px] h-full bg-[#ebebeb] border hover:text-[#ebebeb] hover:bg-transparent hover:border-[#ebebeb] cursor-pointer rounded-md ml-auto">next</button>
   </div>
 </div>
 </template>
