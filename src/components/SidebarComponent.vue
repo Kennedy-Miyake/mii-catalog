@@ -16,6 +16,18 @@ const fetchCategories = async () => {
   console.log(categoriesSide.value)
 }
 
+const nextPage = () => {
+  skip.value += limit
+  if(skip.value > categoriesTotal.value.length) { return }
+  fetchCategories()
+}
+
+const prevPage = () => {
+  if(skip.value == 0) { return }
+  skip.value -= limit
+  fetchCategories()
+}
+
 onMounted(async () => {
   fetchCategories()
 })
@@ -30,8 +42,8 @@ onMounted(async () => {
     {{ category }}
   </div>
   <div class="flex absolute bottom-1 items-center w-full h-[30px] px-6 mb-2 mt-auto">
-    <button class="text-[#322886] w-[70px] h-full bg-[#ebebeb] border hover:text-[#ebebeb] hover:bg-transparent hover:border-[#ebebeb] cursor-pointer rounded-md">prev</button>
-    <button class="text-[#322886] w-[70px] h-full bg-[#ebebeb] border hover:text-[#ebebeb] hover:bg-transparent hover:border-[#ebebeb] cursor-pointer rounded-md ml-auto">next</button>
+    <button @click="prevPage" class="text-[#322886] w-[70px] h-full bg-[#ebebeb] border hover:text-[#ebebeb] hover:bg-transparent hover:border-[#ebebeb] cursor-pointer rounded-md">prev</button>
+    <button @click="nextPage" class="text-[#322886] w-[70px] h-full bg-[#ebebeb] border hover:text-[#ebebeb] hover:bg-transparent hover:border-[#ebebeb] cursor-pointer rounded-md ml-auto">next</button>
   </div>
 </div>
 </template>
