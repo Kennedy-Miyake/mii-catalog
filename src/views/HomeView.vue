@@ -17,6 +17,10 @@ const fetchProduct = async () => {
   products.value = data.products
 };
 
+const updatePagination = () => {
+  if(!selectedCategory.value) { fetchProduct() }
+}
+
 const filteredProducts = computed(() => {
   if(!selectedCategory.value) { return products.value }
   return products.value.slice(skip.value, limit + skip.value)
@@ -30,11 +34,15 @@ async function categorySelected(category) {
 }
 
 const nextPage = () => {
+  if(products.value.length < 21 || (((skip.value + limit) > products.value.length) && selectedCategory.value)) { return }
   skip.value += limit
+  updatePagination()
 }
 
 const prevPage = () => {
+  if(skip.value == 0) { return }
   skip.value -= limit
+  updatePagination()
 }
 
 onMounted(async() => {
