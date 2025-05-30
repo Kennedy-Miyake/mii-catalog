@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {ref, onMounted, computed} from 'vue'
 import { getProducts, getProductsByCategory } from '../assets/services/products.js'
 import { isSidebarOpen } from '../assets/services/sidebar.js'
 import ProductCard from '../components/ProductCardComponent.vue'
@@ -16,6 +17,10 @@ const fetchProduct = async () => {
   products.value = data.products
 };
 
+const filteredProducts = computed(() => {
+  if(!selectedCategory.value) { return products.value }
+  return products.value.slice(skip.value, limit + skip.value)
+})
 
 async function categorySelected(category) {
   selectedCategory.value = category
@@ -44,6 +49,7 @@ onMounted(async() => {
       @selectCategory="categorySelected"
     />
     <ProductCard
+      v-for="p in filteredProducts"
       :product="p"
     />
     <div class="absolute bottom-1 right-6 flex gap-16 mr-2">
