@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import SidebarComponent from '../components/SidebarComponent.vue'
-import { isSidebarOpen, toggleSidebar } from '../assets/services/sidebar.js'
+import { toggleSidebar } from '../assets/services/sidebar.js'
 </script>
 
 <template>
@@ -24,10 +23,6 @@ import { isSidebarOpen, toggleSidebar } from '../assets/services/sidebar.js'
       </button>
     </form>
   </nav>
-  <SidebarComponent
-    v-if="isSidebarOpen"
-    @close="toggleSidebar"
-  />
 </template>
 
 <style scoped>
