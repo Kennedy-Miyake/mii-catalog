@@ -7,12 +7,15 @@ const categoriesSide = ref([])
 const limit = 14
 const skip = ref(0)
 
+const loading = ref(true)
+
 const emit = defineEmits(['selectCategory'])
 
 const fetchCategories = async () => {
   const { data } = await getCategories()
   categoriesTotal.value = data
   categoriesSide.value = categoriesTotal.value.slice(skip.value, skip.value+limit)
+  loading.value = false
 }
 
 function select(category) {
@@ -37,7 +40,9 @@ onMounted(async () => {
 </script>
 
 <template>
-<div class="fixed grid grid-rows-16 top-[75px] left-[15px] flex flex-col bg-[#322886] w-[300px] h-[850px] rounded-2xl z-50">
+<div
+    v-if="!loading"
+    class="fixed grid grid-rows-16 top-[75px] left-[15px] flex flex-col bg-[#322886] w-[300px] h-[850px] rounded-2xl z-50">
   <h3 class="flex mx-auto text-[#ebebeb] font-bold text-3xl mt-4">Categorias</h3>
   <button
       v-for="category in categoriesSide"
