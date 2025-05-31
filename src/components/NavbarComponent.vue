@@ -1,5 +1,32 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { toggleSidebar } from '../assets/services/sidebar.js'
+import { getProductsOnSearch } from '../assets/services/products.js'
+import debounce from '../assets/services/debounce.js'
+import SearchResults from './SearchResultsComponent.vue'
+
+const limit = 3
+
+const searchTerm = ref('')
+const results = ref([])
+
+async function fetchResults(term) {
+  if(!term) {
+    results.value = []
+    return
+  }
+  try {
+    const { data } = await getProductsOnSearch(term)
+    results.value = data.products
+    results.value = results.value.slice(0, limit)
+  } catch(error) {
+    console.error('Erro na busca: ', error)
+  }
+}
+
+const debouncedSearch = debounce((e) => {
+  fetchResults(searchTerm.value)
+}, 300)
 </script>
 
 <template>
@@ -11,9 +38,10 @@ import { toggleSidebar } from '../assets/services/sidebar.js'
     </button>
     <form class="flex items-center ml-auto">
       <input
-          type="text"
+          v-model="searchTerm"
+          @input="debouncedSearch"
           placeholder="Busque seus produtos..."
-          class="w-[500px] h-[40px] border-2 border-r-0 border-[#ededed] focus:outline-none focus:ring-0 rounded-l-md text-[#ededed] px-4"
+          class="w-[600px] h-[40px] border-2 border-r-0 border-[#ededed] focus:outline-none focus:ring-0 rounded-l-md text-[#ededed] px-4"
       />
       <button
         type="submit"
@@ -23,6 +51,21 @@ import { toggleSidebar } from '../assets/services/sidebar.js'
       </button>
     </form>
   </nav>
+  <transition
+    enter-from-class="opacity-0 translate-y-[-10px]"
+    enter-to-class="opacity-100 translate-y-0"
+    enter-active-class="transition duration-300 delay-600 ease-out"
+    leave-active-class="transition duration-200 ease-in"
+  >
+    <div
+        v-if="searchTerm"
+        class="absolute ml-auto right-7 w-[647px] h-[400px] bg-[#322886] rounded-lg mt-18 z-50">
+      <SearchResults
+          v-for="r in results"
+          :result="r"
+      />
+    </div>
+  </transition>
 </template>
 
 <style scoped>
