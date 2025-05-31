@@ -4,6 +4,10 @@ export function getProducts(limit, skip) {
     return api.get(`/products/?limit=${limit}&skip=${skip}&select=title,price,stock,images`)
 }
 
+export function getProductById(id) {
+    return api.get(`/products/${id}`)
+}
+
 export function getProductsByCategory(category) {
     return api.get(`/products/category/${category}`)
 }
