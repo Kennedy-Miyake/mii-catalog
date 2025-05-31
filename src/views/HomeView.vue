@@ -12,12 +12,16 @@ const products = ref([])
 
 const selectedCategory = ref(null)
 
+const loading = ref(true)
+
 const fetchProduct = async () => {
+  loading.value = true
   const { data } = await getProducts(limit, skip.value)
   products.value = data.products
+  loading.value = false
 };
 
-const updatePagination = () => {
+const updatePagination = async () => {
   if(!selectedCategory.value) { fetchProduct() }
 }
 
@@ -33,16 +37,20 @@ async function categorySelected(category) {
   products.value = data.products
 }
 
-const nextPage = () => {
+const nextPage = async () => {
+  loading.value = true
   if(products.value.length < 21 || (((skip.value + limit) > products.value.length) && selectedCategory.value)) { return }
   skip.value += limit
-  updatePagination()
+  await updatePagination()
+  loading.value = false
 }
 
-const prevPage = () => {
+const prevPage = async () => {
   if(skip.value == 0) { return }
+  loading.value = true
   skip.value -= limit
-  updatePagination()
+  await updatePagination()
+  loading.value = false
 }
 
 onMounted(async() => {
