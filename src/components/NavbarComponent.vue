@@ -1,5 +1,32 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { toggleSidebar } from '../assets/services/sidebar.js'
+import { getProductsOnSearch } from '../assets/services/products.js'
+import debounce from '../assets/services/debounce.js'
+import SearchResults from './SearchResultsComponent.vue'
+
+const limit = 3
+
+const searchTerm = ref('')
+const results = ref([])
+
+async function fetchResults(term) {
+  if(!term) {
+    results.value = []
+    return
+  }
+  try {
+    const { data } = await getProductsOnSearch(term)
+    results.value = data.products
+    results.value = results.value.slice(0, limit)
+  } catch(error) {
+    console.error('Erro na busca: ', error)
+  }
+}
+
+const debouncedSearch = debounce((e) => {
+  fetchResults(searchTerm.value)
+}, 300)
 </script>
 
 <template>
