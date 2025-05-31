@@ -12,9 +12,12 @@ const products = ref([])
 
 const selectedCategory = ref(null)
 
+const loading = ref(true)
+
 const fetchProduct = async () => {
   const { data } = await getProducts(limit, skip.value)
   products.value = data.products
+  loading.value = false
 };
 
 const updatePagination = () => {
