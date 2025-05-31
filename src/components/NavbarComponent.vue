@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { toggleSidebar } from '../assets/services/sidebar.js'
 import { getProductsOnSearch } from '../assets/services/products.js'
 import debounce from '../assets/services/debounce.js'
@@ -9,6 +10,13 @@ const limit = 3
 
 const searchTerm = ref('')
 const results = ref([])
+
+const route = useRoute()
+const router = useRouter()
+
+function goToHome() {
+  if(route.name === 'ProductDetails') { router.push({ name: 'home' })}
+}
 
 async function fetchResults(term) {
   if(!term) {
@@ -32,7 +40,7 @@ const debouncedSearch = debounce((e) => {
 <template>
   <nav class="fixed top-0 left-0 flex bg-[#322886] w-full h-[70px]">
     <button
-        @click="toggleSidebar"
+        @click="toggleSidebar(); goToHome()"
         class="flex text-[#ebebeb] font-bold text-3xl items-center ml-[30px] cursor-pointer">
       MII Catalog
     </button>
