@@ -8,6 +8,10 @@ export function getProductsByCategory(category) {
     return api.get(`/products/category/${category}`)
 }
 
+export function getProductsOnSearch(query) {
+    return api.get(`/products/search?q=${encodeURIComponent(query)}`)
+}
+
 export function getCategories() {
     return api.get(`/products/category-list`)
 }
