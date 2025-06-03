@@ -24,3 +24,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Link do Vídeo
+- https://youtu.be/zTM1RucwOJU
